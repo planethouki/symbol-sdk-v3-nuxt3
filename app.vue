@@ -3,6 +3,8 @@
     <h1>Symbol SDK v3 sample</h1>
     <div>公開鍵：{{ publicKey }}</div>
     <div><button @click="handleSend">トランザクション送信</button></div>
+    <div>Status: {{ sendMessage }}</div>
+    <div>Transaction Hash: {{ transactionHash }}</div>
   </div>
 </template>
 
@@ -58,7 +60,10 @@ const handleSend = async () => {
     },
     body: jsonPayload
   })
-  sendMessage.value = JSON.stringify(sendResult)
-  transactionHash.value = hash
+  .then(res => res.json())
+  .then(data => {
+    sendMessage.value = data.message
+    transactionHash.value = hash
+  })
 }
 </script>
