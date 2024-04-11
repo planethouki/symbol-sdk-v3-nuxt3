@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { PrivateKey } from 'symbol-sdk';
-import { SymbolFacade, Network, KeyPair } from 'symbol-sdk/symbol';
+import { SymbolFacade, Network, KeyPair } from 'symbol-sdk/ts/src/symbol/index';
 
 const config = useRuntimeConfig()
 
