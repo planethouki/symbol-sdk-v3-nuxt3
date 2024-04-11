@@ -9,19 +9,20 @@
 </template>
 
 <script setup lang="ts">
-import symbolSdk from 'symbol-sdk'
+import { PrivateKey } from 'symbol-sdk';
+import { SymbolFacade, Network, KeyPair } from 'symbol-sdk/symbol';
 
 const config = useRuntimeConfig()
 
 const PRIVATE_KEY = config.public.PRIVATE_KEY
 const NODE_URL = config.public.NODE_URL
 
-const network = symbolSdk.symbol.Network.TESTNET
+const network = Network.TESTNET
 
-const facade = new symbolSdk.facade.SymbolFacade(network.name)
+const facade = new SymbolFacade('mainnet')
 
-const privateKey = new symbolSdk.PrivateKey(PRIVATE_KEY)
-const keyPair = new symbolSdk.symbol.KeyPair(privateKey)
+const privateKey = new PrivateKey(PRIVATE_KEY)
+const keyPair = new KeyPair(privateKey)
 
 const textEncoder = new TextEncoder()
 
@@ -33,7 +34,7 @@ const transactionHash = ref<string>()
 const handleSend = async () => {
   sendMessage.value = '送信中…'
   transactionHash.value = ''
-  const deadline = network.fromDatetime(new Date(Date.now() + 7200000)).timestamp
+  const deadline = facade.now().addHours(2)
   const messageBytes = textEncoder.encode('Hello, World!')
   const message = new Uint8Array(messageBytes.length + 1)
   message.set(new Uint8Array([0]), 0)
