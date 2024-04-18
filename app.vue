@@ -49,7 +49,7 @@ const handleSend = async () => {
     message
   })
   const signature = facade.signTransaction(keyPair, transaction)
-  const jsonPayload = facade.transactionFactory.constructor.attachSignature(transaction, signature)
+  const jsonPayload = facade.transactionFactory.static.attachSignature(transaction, signature)
   const hash = facade.hashTransaction(transaction).toString()
 
   await fetch(`${NODE_URL}/transactions`, {
