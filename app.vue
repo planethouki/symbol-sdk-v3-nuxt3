@@ -17,9 +17,7 @@ const config = useRuntimeConfig()
 const PRIVATE_KEY = config.public.PRIVATE_KEY
 const NODE_URL = config.public.NODE_URL
 
-const network = Network.TESTNET
-
-const facade = new SymbolFacade('mainnet')
+const facade = new SymbolFacade(Network.TESTNET.name)
 
 const privateKey = new PrivateKey(PRIVATE_KEY)
 const keyPair = new KeyPair(privateKey)
@@ -34,7 +32,7 @@ const transactionHash = ref<string>()
 const handleSend = async () => {
   sendMessage.value = '送信中…'
   transactionHash.value = ''
-  const deadline = facade.now().addHours(2)
+  const deadline = facade.now().addHours(2).timestamp;
   const messageBytes = textEncoder.encode('Hello, World!')
   const message = new Uint8Array(messageBytes.length + 1)
   message.set(new Uint8Array([0]), 0)
