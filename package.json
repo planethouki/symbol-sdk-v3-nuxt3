@@ -21,6 +21,6 @@
   },
   "dependencies": {
     "symbol-crypto-wasm-web": "^0.1.1",
-    "symbol-sdk": "^3.2.0"
+    "symbol-sdk": "^3.2.1"
   }
 }
